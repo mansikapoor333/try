@@ -50,14 +50,15 @@ class App extends Component {
     // this.setState({
     //   loading: false,
     //   articles: [],
-    // site:'xxx'
+    // site:'xx
     // })
     if (checked === true) {
       // console.log("true")
       {
         this.setState({ loading: true })
-        // fetch("https://content.guardianapis.com/search?api-key=dcf8e105-1678-40c6-8e3d-31bfa8968101&section=(sport|business|technology|politics)&show-blocks=all")
-        fetch("http://localhost:8080/mainguardian")
+        fetch("https://content.guardianapis.com/search?api-key=dcf8e105-1678-40c6-8e3d-31bfa8968101&section=(sport|business|technology|politics)&show-blocks=all")
+        // fetch("http://mansihw8-envtoday.eba-jhye5r7y.us-east-1.elasticbeanstalk.com/mainguardian")
+        // fetch("http://localhost:8080/mainguardian")
           .then(response => response.json())
           .then(data => {
             console.log(data.response.results)
@@ -74,8 +75,9 @@ class App extends Component {
       {
         this.setState({ loading: true })
         // console.log("false")
-        // fetch("https://api.nytimes.com/svc/topstories/v2/home.json?api-key=bLImTTiycbyuHaWT8j99q2mgIgUImD0O")
-        fetch("http://localhost:8080/mainnewyork")
+        fetch("https://api.nytimes.com/svc/topstories/v2/home.json?api-key=bLImTTiycbyuHaWT8j99q2mgIgUImD0O")
+        // fetch("http://mansihw8-envtoday.eba-jhye5r7y.us-east-1.elasticbeanstalk.com/mainnewyork")
+        // fetch("http://localhost:8080/mainnewyork")
           .then(response => response.json())
           .then(data => {
             console.log("data in false", data.results)
@@ -101,9 +103,9 @@ class App extends Component {
       this.setState({ checked: true })
 
 
-      // fetch("https://content.guardianapis.com/search?api-key=dcf8e105-1678-40c6-8e3d-31bfa8968101&section=(sport|business|technology|politics)&show-blocks=all")
-      fetch("http://localhost:8080/mainguardian")
-      // fetch("http://mansihw8-envtoday.eba-jhye5r7y.us-east-1.elasticbeanstalk.com/mainnewyork")
+      fetch("https://content.guardianapis.com/search?api-key=dcf8e105-1678-40c6-8e3d-31bfa8968101&section=(sport|business|technology|politics)&show-blocks=all")
+      // fetch("http://localhost:8080/mainguardian")
+      // fetch("http://mansihw8-envtoday.eba-jhye5r7y.us-east-1.elasticbeanstalk.com/mainguardian")
         .then(response => response.json())
         .then(data => {
           console.log("data",data);
@@ -118,9 +120,9 @@ class App extends Component {
     } else {
       this.setState({ loading: false })
       // console.log("false")
-      // fetch("https://api.nytimes.com/svc/topstories/v2/home.json?api-key=bLImTTiycbyuHaWT8j99q2mgIgUImD0O")
-      // fetch("http://mansihw8-envtoday.eba-jhye5r7y.us-east-1.elasticbeanstalk.com/mainguardian")
-      fetch("http://localhost:8080/mainnewyork")
+      fetch("https://api.nytimes.com/svc/topstories/v2/home.json?api-key=bLImTTiycbyuHaWT8j99q2mgIgUImD0O")
+      // fetch("http://mansihw8-envtoday.eba-jhye5r7y.us-east-1.elasticbeanstalk.com/mainnewyork")
+      // fetch("http://localhost:8080/mainnewyork")
         .then(response => response.json())
         .then(data => {
           console.log("data in false", data.results)
@@ -183,13 +185,13 @@ class App extends Component {
                         <FormControl type="text" placeholder="Keyword" className="mr-sm-2" />
 
                       </Form> */}
-                        <Nav.Link style={{color:'white'}}> <Link to="/" style={{color:'#F5F5F5'}}>Home </Link></Nav.Link>
+                        <Nav.Link style={{fontFamily:'Georgia'}}> <Link to="/">Home </Link></Nav.Link>
                         {/* <Nav style={{ display: "flex", flexDirection: "row" }}> */}
-                        <Nav.Link> <Link to="/World" style={{color:'white'}}>World </Link></Nav.Link>
-                        <Nav.Link> <Link to="/Politics" style={{color:'white'}}>Politics </Link></Nav.Link>
-                        <Nav.Link> <Link to="/Business" style={{color:'white'}}>Business </Link></Nav.Link>
-                        <Nav.Link> <Link to="/Technology" style={{color:'white'}}>Technology </Link></Nav.Link>
-                        <Nav.Link><Link to="/Sports" style={{color:'white'}}>Sports </Link></Nav.Link>
+                        <Nav.Link style={{fontFamily:'Georgia'}}> <Link to="/World">World </Link></Nav.Link>
+                        <Nav.Link style={{fontFamily:'Georgia'}}> <Link to="/Politics">Politics </Link></Nav.Link>
+                        <Nav.Link style={{fontFamily:'Georgia'}}> <Link to="/Business">Business </Link></Nav.Link>
+                        <Nav.Link style={{fontFamily:'Georgia'}}> <Link to="/Technology">Technology </Link></Nav.Link>
+                        <Nav.Link style={{fontFamily:'Georgia'}}><Link to="/Sports">Sports </Link></Nav.Link>
 
 
 

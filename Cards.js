@@ -9,6 +9,7 @@ import { Icon, InlineIcon } from '@iconify/react';
 import mdShare from '@iconify/icons-ion/md-share';
 import { Link } from 'react-router-dom';
 import '../App.css';
+import Spinner from './Spinner';
 
 
 
@@ -43,18 +44,18 @@ class Cards extends Component {
       {/* trigger={<button>Trigger</button>}  */}
       {close => (
         <div className="sharewindow" style={{ height: '100%', width: '100%' }}>
-          <div style={{ width: '95%', fontSize: '20px', fontFamily: 'Times new roman' }}>
+          <div style={{ width: '95%', fontSize: '20px', fontFamily: 'Serif', fontWeight:'bold' }}>
             {article.webTitle}
 
           </div>
-          <div style={{ marginTop: '5%', fontSize: '17px', fontFamily: 'Times New roman' }}>
+          <div style={{ marginTop: '5%', fontSize: '17px', fontFamily: 'Serif' }}>
             Share Via
           </div>
-          <a className="close" onClick={close} style={{ marginRight: '3%', marginTop: '-21%' }}>
+          <a className="close" onClick={close} style={{ marginRight: '3%', marginTop: '-15%' }}>
             &times;
           </a>
 
-          <div className="sharing1" style={{ marginTop: '6%' , marginLeft:'-67%'}}>
+          <div className="sharing1" style={{ marginTop: '1%' , marginLeft:'-67%'}}>
             <FacebookShareButton className='fbshare'
               url={article.webUrl}
               // quote="Guardian"
@@ -103,17 +104,18 @@ class Cards extends Component {
       {/* trigger={<button>Trigger</button>}  */}
       {close => (
         <div className="sharewindow" style={{ height: '100%', width: '100%' }}>
-          <div style={{ width: '95%', fontSize: '20px', fontFamily: 'Times new roman' }}>
+          <div style={{ width: '95%', fontSize: '20px', fontFamily: 'Serif', fontWeight:'bold' }}>
+            {/* {'GUARDIAN'} */}
             {article.title}
             </div>
-            <div style={{ marginTop: '5%', fontSize: '20px', fontFamily: 'Times New roman' }}>
+            <div style={{ marginTop: '5%', fontSize: '20px', fontFamily: 'Serif'}}>
               Share Via
           </div>
             <a className="close" onClick={close} style={{ marginRight: '1%', marginTop: '-22%' }}>
               &times;
           </a>
 
-          <div className="sharing1" style={{ marginTop: '6%' , marginLeft:'-67%'}}>
+          <div className="sharing1" style={{ marginTop: '1%' , marginLeft:'-67%'}}>
             <FacebookShareButton className='fbshare'
               url={article.url}
               // quote="Guardian"
@@ -182,6 +184,10 @@ class Cards extends Component {
 
 
   render() {
+    if (this.state.loading) {
+      return <Spinner loading={this.state.loading} />
+  }
+
     console.log('render()', this.props.website)
 
     if (this.props.website == 2) {
@@ -202,16 +208,16 @@ article.blocks.main && article.blocks.main.elements["0"] && article.blocks.main.
                   <Card.Img className="cardgua-img" height="250px" width="100px" style={{ marginLeft: '-3px', float: 'left', marginTop: '-30%', padding: '3% 3% 3% 3%', border: 'solid 1px #ededed' }} src={article.blocks.main.elements["0"].assets[[article.blocks.main.elements["0"].assets.length - 1]] ? article.blocks.main.elements["0"].assets[[article.blocks.main.elements["0"].assets.length - 1]].file : "https://assets.guim.co.uk/images/eada8aa27c12fe2d5afa3a89d3fbae0d/fallback-logo.png"} />
                 </div>
                 <div style={{ marginTop: '10%', height: '20%', marginLeft: '2%' }}>
-                  <Card.Body className="bodygua" style={{ marginTop: '-30px', marginLeft: '238px' }} >
+                  <Card.Body className="bodygua" style={{ marginTop: '-30px', marginLeft: '238px'}} >
                     {/* <Link to={"/article?id="+ article.id + "&website=2"} > hafd</Link> */}
-                    <Card.Title className="cardgua-title" style={{ marginTop: '-9%', display: 'flex' }} >{article.webTitle}</Card.Title>
+                    <Card.Title className="cardgua-title" style={{ marginTop: '-9%', display: 'flex',fontStyle:'bold'}} >{article.webTitle}</Card.Title>
                     <Card.Text className="summary">{article.blocks.body[0].bodyTextSummary}</Card.Text>
                     <div>
-                      <Card.Text style={{ float: 'left' }} >{article.webPublicationDate.split('T')[0]}</Card.Text>
+                      <Card.Text style={{ float: 'left', fontStyle:'italic' }} >{article.webPublicationDate.split('T')[0]}</Card.Text>
                     </div>
                     <div>
                       {article.sectionId == "world" &&
-                        <Card.Text style={{ float: 'right', backgroundColor: '7B4DFE' }} >{article.sectionId.toUpperCase()}</Card.Text>}
+                        <Card.Text style={{ float: 'right', backgroundColor: '#7B4DFE' }} >{article.sectionId.toUpperCase()}</Card.Text>}
 
                       {article.sectionId == "sport" &&
                         <Card.Text style={{ float: 'right', backgroundColor: '#F6C244' }} >{article.sectionId.toUpperCase()}</Card.Text>}
@@ -225,8 +231,8 @@ article.blocks.main && article.blocks.main.elements["0"] && article.blocks.main.
                       {article.sectionId == "politics" &&
                         <Card.Text style={{ float: 'right', backgroundColor: '#419488' }} >{article.sectionId.toUpperCase()}</Card.Text>}
 
-                      {article.sectionId == "" &&
-                        <Card.Text style={{ float: 'right', backgroundColor: '#6E757C' }} >{"HEALTH"}</Card.Text>}
+                      {!article.section == "world" && !article.section == "sport" && !article.section == "technology" && !article.section == "business" && !article.section == "politics" &&
+                        <Card.Text style={{ float: 'right', backgroundColor: '#6E757C' }} >HEALTH</Card.Text>}
 
 
                     </div>
@@ -269,18 +275,18 @@ article.blocks.main && article.blocks.main.elements["0"] && article.blocks.main.
                     {/* {article.multimedia.url + "Url"} */}
                     {/* <Link to={"/article?id="+ article.url + "&website=1"} > safd</Link> */}
                     {/* console.log(articles.multimedia.url) */}
-                    <Card.Title style={{ marginTop: '-9%', display: 'flex' }}>{article.title}</Card.Title>
+                    <Card.Title style={{ marginTop: '-9%', display: 'flex', fontWeight:'bold', fontFamily:'Georgia' }}>{article.title}</Card.Title>
                     <Card.Text className="summary1" >{article.abstract}</Card.Text>
                     {/* <Card.Text>{article.published_date.TextSummary}</Card.Text> */}
                     <div>
-                      <Card.Text style={{ float: 'left' }}>{article.published_date.split('T')[0]}</Card.Text>
+                      <Card.Text style={{ float: 'left', fontStyle:'italic'}}>{article.published_date.split('T')[0]}</Card.Text>
                     </div>
                     <div>
                       {/* <Card.Text style={{ float: 'right' }}>{article.section.toUpperCase()}</Card.Text> */}
                       {article.section == "world" &&
-                        <Card.Text style={{ float: 'right', backgroundColor: '7B4DFE' }} >{article.section.toUpperCase()}</Card.Text>}
+                        <Card.Text style={{ float: 'right', backgroundColor: '#7B4DFE' }} >{article.section.toUpperCase()}</Card.Text>}
 
-                      {article.section == "sport" &&
+                      {article.section == "sports" &&
                         <Card.Text style={{ float: 'right', backgroundColor: '#F6C244' }} >{article.section.toUpperCase()}</Card.Text>}
 
                       {article.section == "technology" &&
@@ -292,8 +298,8 @@ article.blocks.main && article.blocks.main.elements["0"] && article.blocks.main.
                       {article.section == "politics" &&
                         <Card.Text style={{ float: 'right', backgroundColor: '#419488' }} >{article.section.toUpperCase()}</Card.Text>}
 
-                      {article.section == "" &&
-                        <Card.Text style={{ float: 'right', backgroundColor: '#6E757C' }} >{"HEALTH"}</Card.Text>}
+                      {!article.section == "world" && !article.section == "sports" && !article.section == "technology" && !article.section == "business" && !article.section == "politics" &&
+                        <Card.Text style={{ float: 'right', backgroundColor: '#6E757C' }} >HEALTH</Card.Text>}
                     </div>
                     {/* <button onClick={this.togglePopup.bind(this)}> Click To Launch Popup</button> */}
 

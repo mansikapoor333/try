@@ -2,6 +2,7 @@ import React from "react";
 import { css } from "@emotion/core";
 import BounceLoader from "react-spinners/BounceLoader";
 import '../App.css';
+import Loading from './Loading.js';
 
 
 // {
@@ -26,7 +27,9 @@ class Spinner extends React.Component {
                     color={"blue"}
                     loading={this.props.loading}
                 />
+               
             </div>
+            //  <Loading />
         );
     }
 }

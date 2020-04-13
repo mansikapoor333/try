@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Navbar, Nav, Form, FormControl, Card } from 'react-bootstrap';
-import { FaRegBookmark } from 'react-icons/fa';
+import { FaBookmark } from 'react-icons/fa';
 import { IconContext } from "react-icons";
 // import SocialShare from './components/SocialShare';
 import Async from './Async';
@@ -21,7 +21,7 @@ import Favorites from './Favorites';
 
 
 
-class Reusableheader extends Component {
+class Reusableheader1 extends Component {
   constructor(props) {
     super(props)
     // this.handleAddComment = this.handleAddComment.bind(this);
@@ -105,9 +105,9 @@ class Reusableheader extends Component {
               <Form inline style={{ float: 'right', marginLeft: '300px' }}>
 
 
-                <IconContext.Provider value={{ color: "white", size:'20px', marginLeft:'5%', className: "global-class-name1234" }}>
+                <IconContext.Provider value={{ style:{fill:'white'},color: "white", size:'20px', marginLeft:'5%', className: "global-class-name1234" }}>
                   <div style={{ marginLeft: "-86%" }}>
-                    <FaRegBookmark onClick={() => {
+                    <FaBookmark onClick={() => {
                       window.location.href = '/favorites';
                     }} />
                   </div>
@@ -175,4 +175,4 @@ class Reusableheader extends Component {
 
 }
 
-export default Reusableheader;
+export default Reusableheader1;

@@ -58,6 +58,12 @@ Navbar{
    /* margin-right: -52%;
    margin-top: -8%; */
  }
+
+ .global-class-name1{
+  margin-left:'46%';
+  margin-right:'-9%';
+ }
+
 .summary{
   overflow: hidden;
   text-overflow: ellipsis;
@@ -73,6 +79,7 @@ Navbar{
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 6;
   text-align: left;
+  
 }
 .linksd {
   display: block;
@@ -132,4 +139,12 @@ margin-top: -92%;
 text-overflow: ellipsis;
 display: -webkit-box;
  -webkit-line-clamp: 2;
+ font-family: Georgia, 'Times New Roman', Times, serif;
+ font-weight: bold;
 }
+
+.navbar-light .navbar-nav .nav-link a{color:#7D8BA9}
+
+
+
+.navbar-light .navbar-nav .nav-link a:focus,.navbar-light .navbar-nav .nav-link a:hover{color:#fff}

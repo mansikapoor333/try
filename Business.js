@@ -9,6 +9,10 @@ import Cards from './Cards.js';
 // import SocialShare from './components/SocialShare';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import Spinner from './Spinner';
+import { FaRegBookmark } from 'react-icons/fa';
+import { IconContext } from "react-icons";
+import Async from './Async';
 
 
 // function App() {
@@ -35,9 +39,9 @@ class Business extends Component {
       // console.log("true")
       {
         this.setState({ loading: true })
-        // fetch("https://content.guardianapis.com/business?api-key=dcf8e105-1678-40c6-8e3d-31bfa8968101&show-blocks=all")
-        // fetch("http://mansihw8-envtoday.eba-jhye5r7y.us-east-1.elasticbeanstalk.com/otherguardian/business")
-        fetch("http://localhost:8080/otherguardian1/business")
+        fetch("https://content.guardianapis.com/business?api-key=dcf8e105-1678-40c6-8e3d-31bfa8968101&show-blocks=all")
+          // fetch("http://mansihw8-envtoday.eba-jhye5r7y.us-east-1.elasticbeanstalk.com/otherguardian/business")
+          // fetch("http://localhost:8080/otherguardian1/business")
           .then(response => response.json())
           .then(data => {
             console.log(data.response.results)
@@ -54,9 +58,9 @@ class Business extends Component {
       {
         this.setState({ loading: true })
         // console.log("false")
-        // fetch("https://api.nytimes.com/svc/topstories/v2/business.json?api-key=bLImTTiycbyuHaWT8j99q2mgIgUImD0O")
-        // fetch("http://mansihw8-envtoday.eba-jhye5r7y.us-east-1.elasticbeanstalk.com/othernewyork/business")
-        fetch("http://localhost:8080/othernewyork1/business")
+        fetch("https://api.nytimes.com/svc/topstories/v2/business.json?api-key=bLImTTiycbyuHaWT8j99q2mgIgUImD0O")
+          // fetch("http://mansihw8-envtoday.eba-jhye5r7y.us-east-1.elasticbeanstalk.com/othernewyork/business")
+          // fetch("http://localhost:8080/othernewyork1/business")
           .then(response => response.json())
           .then(data => {
             console.log("data in false", data.results)
@@ -77,11 +81,11 @@ class Business extends Component {
   componentDidMount() {
 
     this.setState({ loading: true })
-    if (localStorage.getItem("state") == "true"){
-        // this.setState({checked: true})
-        // fetch("https://content.guardianapis.com/business?api-key=dcf8e105-1678-40c6-8e3d-31bfa8968101&show-blocks=all")
+    if (localStorage.getItem("state") == "true") {
+      // this.setState({checked: true})
+      fetch("https://content.guardianapis.com/business?api-key=dcf8e105-1678-40c6-8e3d-31bfa8968101&show-blocks=all")
         // fetch("http://mansihw8-envtoday.eba-jhye5r7y.us-east-1.elasticbeanstalk.com/otherguardian/business")
-        fetch("http://localhost:8080/otherguardian1/business")
+        // fetch("http://localhost:8080/otherguardian1/business")
         .then(response => response.json())
         .then(data => {
           console.log(data.response.results, data);
@@ -89,79 +93,112 @@ class Business extends Component {
             loading: false,
             articles: data.response.results,
             site: 'guardian'
-  
+
           })
         })
-        
-      } else {
-        // this.setState({checked: false})
-        // fetch("https://api.nytimes.com/svc/topstories/v2/business.json?api-key=bLImTTiycbyuHaWT8j99q2mgIgUImD0O")
+
+    } else {
+      // this.setState({checked: false})
+      fetch("https://api.nytimes.com/svc/topstories/v2/business.json?api-key=bLImTTiycbyuHaWT8j99q2mgIgUImD0O")
         // fetch("http://mansihw8-envtoday.eba-jhye5r7y.us-east-1.elasticbeanstalk.com/othernewyork/business")
-        fetch("http://localhost:8080/othernewyork1/business")
-          .then(response => response.json())
-          .then(data => {
-            console.log("data in false", data.results)
-            this.setState({
-              loading: false,
-              articles: data.results,
-              site: 'ny'
-            })
+        // fetch("http://localhost:8080/othernewyork1/business")
+        .then(response => response.json())
+        .then(data => {
+          console.log("data in false", data.results)
+          this.setState({
+            loading: false,
+            articles: data.results,
+            site: 'ny'
           })
-        
-      }
-   
+        })
+
+    }
+
   }
 
-//   shareOpenToggle() {
-//     if (this.state.shareOpen==="closeShare") {
-//         this.setState({
-//             shareOpen: "openShare",
-//             toggleButtonText: "Hide sharing options"
-//         });
-//     }else {
-//         this.setState({
-//             shareOpen: "closeShare",
-//             toggleButtonText: "Share this"
-//         });
-//     }   
-// }
+  //   shareOpenToggle() {
+  //     if (this.state.shareOpen==="closeShare") {
+  //         this.setState({
+  //             shareOpen: "openShare",
+  //             toggleButtonText: "Hide sharing options"
+  //         });
+  //     }else {
+  //         this.setState({
+  //             shareOpen: "closeShare",
+  //             toggleButtonText: "Share this"
+  //         });
+  //     }   
+  // }
+
+  func(val) {
+    console.log(val)
+    // const history = useHistory();
+    window.location.href = '/search' + "?val=" + val + '&website=' + this.state.site;
+    // return <Redirect to='/search" + "?val=" + val + "?website=" + this.state.site' push={true} />
+    // browserHistory.push("/search" + "?val=" + val + "?website=" + this.state.site);
+
+    // console.log("gua")
+
+  }
+
   render() {
-    const text = this.state.loading ? "" : ""
+    if (this.state.loading) {
+      return <Spinner loading={this.state.loading} />
+    }
     return (
-      
+
       <div className="App">
-       
-          
 
-        <Navbar className="nv" bg="primary" variant="dark">
-          {/* <asyncsearch /> */}
 
-          <Form inline>
+
+        <Navbar className="navbar bg-primary" expand="lg">
+        <Async func={this.func.bind(this)}/>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="mr-auto">
+
+              {/* <Form inline>
             <FormControl type="text" placeholder="Keyword" className="mr-sm-2" />
 
-          </Form>
-          <Navbar.Brand> <Link to = "/">Home </Link></Navbar.Brand>
-          <Nav style={{ display: "flex", flexDirection: "row" }}>
-            <Link to = "/">World </Link>
-            <Link to = "/">Politics </Link>
-            <Link to = "/">Business </Link>
-            <Link to = "/">Technology </Link>
-            <Link to = "/">Sports </Link>
-            {/* <Nav.Link> <Link to = "/" > Home </Link></Nav.Link> */}
-          </Nav>
-
-          <SwitchExample handler={this.handleChange.bind(this)} />
-
-          <p>{text}</p>
+          </Form> */}
+              <Nav.Link style={{ fontFamily: 'Georgia' }}> <Link to="/">Home </Link></Nav.Link>
+              {/* <Nav style={{ display: "flex", flexDirection: "row" }}> */}
+              <Nav.Link style={{ fontFamily: 'Georgia' }}> <Link to="/World">World </Link></Nav.Link>
+              <Nav.Link style={{ fontFamily: 'Georgia' }}> <Link to="/Politics">Politics </Link></Nav.Link>
+              <Nav.Link style={{ fontFamily: 'Georgia' }}> <Link to="/Business">Business </Link></Nav.Link>
+              <Nav.Link style={{ fontFamily: 'Georgia' }}> <Link to="/Technology">Technology </Link></Nav.Link>
+              <Nav.Link style={{ fontFamily: 'Georgia' }}><Link to="/Sports">Sports </Link></Nav.Link>
+            </Nav>
+            <Form inline style={{ float: 'right', marginLeft: '300px' }}>
 
 
+              <IconContext.Provider value={{ color: "white", size: '20px', className: "global-class-name" }}>
+                <div style={{ marginLeft: "-25%" }}>
+                  <FaRegBookmark onClick={() => {
+                    window.location.href = '/favorites';
+                  }} />
+                </div>
+              </IconContext.Provider>
 
+              <SwitchExample handler={this.handleChange.bind(this)} />
+            </Form>
+
+
+          </Navbar.Collapse>
         </Navbar>
-        
+
+
+
+
+
+
+
+
+
         <Cards articles={this.state.articles} website={this.state.site == 'ny' ? 1 : 2} />
 
-     
-          )}
+
+        )}
 
 
 
@@ -172,11 +209,10 @@ class Business extends Component {
 
 
       </div>
-     
+
     );
   }
 }
 
-export default Business 
-
+export default Business;
 
